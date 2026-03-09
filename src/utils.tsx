@@ -26,6 +26,19 @@ import {
   Activity,
   Terminal,
   Settings2,
+  Zap,
+  Clock,
+  ShoppingCart,
+  GraduationCap,
+  Plane,
+  Building2,
+  Stethoscope,
+  Truck,
+  Landmark,
+  ArrowRight,
+  Github,
+  Heart,
+  Shield,
   LucideIcon,
 } from "lucide-react";
 
@@ -34,6 +47,7 @@ export interface SubMenuItem {
   title?: string;
   desc?: string;
   icon?: LucideIcon;
+  iconName?: string;
   path?: string;
   featured?: boolean;
   links?: SubMenuItem[];
@@ -74,6 +88,19 @@ export const iconMap: Record<string, LucideIcon> = {
   Activity,
   Terminal,
   Settings2,
+  Zap,
+  Clock,
+  ShoppingCart,
+  GraduationCap,
+  Plane,
+  Building2,
+  Stethoscope,
+  Truck,
+  Landmark,
+  ArrowRight,
+  Github,
+  Heart,
+  Shield,
 };
 export const ICON_OPTIONS = Object.keys(iconMap);
 

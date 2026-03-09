@@ -1,12 +1,30 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Code, Server, Database, Smartphone, Cloud, PenTool, Layout, Terminal, Globe, Cpu } from "lucide-react";
+import { m as motion, AnimatePresence } from "framer-motion";
+import {
+  Code,
+  Server,
+  Database,
+  Smartphone,
+  Cloud,
+  PenTool,
+  Layout,
+  Terminal,
+  Globe,
+  Cpu,
+} from "lucide-react";
 import "./HireTeam.css";
 
 const HireTeam = () => {
   const [activeCategory, setActiveCategory] = useState("Frontend");
 
-  const categories = ["Frontend", "Backend", "Mobile", "CMS", "Database", "Cloud"];
+  const categories = [
+    "Frontend",
+    "Backend",
+    "Mobile",
+    "CMS",
+    "Database",
+    "Cloud",
+  ];
 
   const technologies = {
     Frontend: [
@@ -46,7 +64,7 @@ const HireTeam = () => {
       { name: "Azure", icon: Cloud, count: 85 },
       { name: "Google Cloud", icon: Cloud, count: 70 },
       { name: "Docker", icon: Cpu, count: 95 },
-    ]
+    ],
   };
 
   return (
@@ -62,7 +80,8 @@ const HireTeam = () => {
             Hire Your <span className="text-blue-600">Dream Team</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Access a pool of top-tier developers, designers, and engineers ready to scale your business.
+            Access a pool of top-tier developers, designers, and engineers ready
+            to scale your business.
           </p>
         </div>
 
@@ -72,10 +91,11 @@ const HireTeam = () => {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${activeCategory === category
-                ? "bg-blue-600 text-white shadow-lg scale-105"
-                : "bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-900 border border-gray-200"
-                }`}
+              className={`px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 ${
+                activeCategory === category
+                  ? "bg-blue-600 text-white shadow-lg scale-105"
+                  : "bg-white text-gray-600 hover:bg-gray-100 hover:text-gray-900 border border-gray-200"
+              }`}
             >
               {category}
             </button>
@@ -112,9 +132,13 @@ const HireTeam = () => {
         </motion.div>
 
         <div className="mt-16 text-center">
-          <p className="text-gray-600 mb-6 font-medium">Don't see what you're looking for?</p>
+          <p className="text-gray-600 mb-6 font-medium">
+            Don't see what you're looking for?
+          </p>
           <button
-            onClick={() => window.open("https://calendly.com/etechnocrat/saas-app", "_blank")}
+            onClick={() =>
+              window.open("https://calendly.com/etechnocrat/saas-app", "_blank")
+            }
             className="px-8 py-4 bg-gray-900 text-white rounded-xl font-bold hover:bg-gray-800 transition-colors shadow-lg shadow-gray-900/20 cursor-pointer"
           >
             Schedule a Consultation

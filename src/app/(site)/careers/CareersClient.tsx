@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import {
   Rocket,
   Users,
@@ -22,11 +22,12 @@ import {
   Loader2,
   ChevronRight,
   ArrowLeft,
+  HelpCircle,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CareersData } from "@/lib/cms-defaults";
-import * as LucideIcons from "lucide-react";
+import { iconMap } from "@/utils";
 
 const Careers = ({ data }: { data: CareersData }) => {
   const router = useRouter();
@@ -54,7 +55,7 @@ const Careers = ({ data }: { data: CareersData }) => {
   const jobs = data.jobs;
 
   const getIcon = (name: string) => {
-    const IconComponent = (LucideIcons as any)[name] || LucideIcons.HelpCircle;
+    const IconComponent = iconMap[name] || HelpCircle;
     return <IconComponent className="w-6 h-6 text-blue-500" />;
   };
 

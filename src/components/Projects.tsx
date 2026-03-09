@@ -1,9 +1,10 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { m as motion, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import { ProjectsData, defaultProjectsData } from "@/lib/cms-defaults";
 
@@ -65,14 +66,13 @@ const Projects = ({ data }: ProjectsProps) => {
                 className="group relative h-[450px] md:h-[70vh] w-[85vw] md:w-[45vw] overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-xl shrink-0 cursor-pointer flex flex-col hover:shadow-2xl transition-all duration-300"
                 onClick={() => router.push(`/case-study/${project.id}`)}
               >
-                {/* Background with Overlay - subtly visible */}
-                <div
-                  style={{
-                    backgroundImage: `url(${project.imageUrl})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                  className="absolute inset-0 transition-transform duration-700 group-hover:scale-110 opacity-20"
+                <Image
+                  src={project.imageUrl}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 40vw"
+                  quality={85}
+                  className="object-cover transition-transform duration-700 group-hover:scale-110 opacity-20"
                 />
                 <div className="absolute inset-0 bg-gradient-to-br from-white via-white/80 to-transparent" />
 

@@ -2,8 +2,9 @@
 
 import React, { useRef } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 import { getBlogsData } from "@/lib/cms";
 import { BlogsData } from "@/lib/cms-defaults";
@@ -119,10 +120,15 @@ const Insights = () => {
               <div className="relative h-64 mb-6 overflow-hidden rounded-2xl bg-gray-100">
                 <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-blue-900/0 transition-colors z-10" />
                 {/* Image */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={item.image}
-                  alt={item.title}
+                  alt={item.title || "Insight image"}
+                  width={400}
+                  height={256}
+                  unoptimized={
+                    item.image.includes("placehold.co") ||
+                    item.image.includes(".svg")
+                  }
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
@@ -156,9 +162,11 @@ const Insights = () => {
                   <div className="flex items-center gap-2">
                     <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-[10px] uppercase overflow-hidden">
                       {item.authorImage ? (
-                        <img
+                        <Image
                           src={item.authorImage}
-                          alt={item.author}
+                          alt={item.author || "Author"}
+                          width={32}
+                          height={32}
                           className="w-full h-full object-cover"
                         />
                       ) : (

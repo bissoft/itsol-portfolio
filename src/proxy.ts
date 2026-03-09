@@ -4,7 +4,7 @@ import { jwtVerify } from "jose";
 const secretKey = "itsol-cms-secret-key-change-this-in-env";
 const key = new TextEncoder().encode(process.env.JWT_SECRET || secretKey);
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Protect /admin routes

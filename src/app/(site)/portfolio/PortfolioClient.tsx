@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, LayoutGroup } from "framer-motion";
+import { m as motion, LayoutGroup } from "framer-motion";
 import {
   ArrowLeft,
   ChevronRight,
@@ -18,9 +18,15 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
-import ParticleBackground from "@/components/ParticleBackground";
+import dynamic from "next/dynamic";
 import Testimonials from "@/components/Testimonials";
 import WorkProcess from "@/components/WorkProcess";
+import Image from "next/image";
+
+const ParticleBackground = dynamic(
+  () => import("@/components/ParticleBackground"),
+  { ssr: false },
+);
 
 import { ProjectsData } from "@/lib/cms-defaults";
 
@@ -256,14 +262,12 @@ const Portfolio = ({ data }: { data: ProjectsData }) => {
                     className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300"
                   >
                     <div className="relative h-48 overflow-hidden">
-                      <img
+                      <Image
                         src={project.imageUrl}
                         alt={project.title}
+                        width={600}
+                        height={400}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        onError={(e) =>
-                          (e.currentTarget.src =
-                            "https://via.placeholder.com/600x400?text=Project")
-                        }
                       />
                     </div>
                     <div className="p-6">

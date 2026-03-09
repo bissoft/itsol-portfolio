@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import Image from "next/image";
 
 const defaultTestimonials = [
   {
@@ -98,10 +99,11 @@ const Testimonials = ({ data }: TestimonialsProps) => {
               >
                 <div className="flex-shrink-0">
                   <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-br from-blue-500 to-blue-600">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={items[activeIndex].image}
                       alt={items[activeIndex].name}
+                      width={96}
+                      height={96}
                       className="w-full h-full rounded-full object-cover border-4 border-white"
                     />
                   </div>

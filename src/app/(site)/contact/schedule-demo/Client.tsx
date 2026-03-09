@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Calendar, Clock, User, Mail, Phone, Check, ChevronDown, ArrowLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react"; // Added useEffect for hydration safe date
 import { useRouter } from "next/navigation";

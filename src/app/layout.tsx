@@ -1,7 +1,20 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 import { Toaster } from "react-hot-toast";
+import FramerMotionProvider from "@/components/FramerMotionProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -60,9 +73,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased" suppressHydrationWarning>
-        {children}
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
+      <body className="antialiased font-inter" suppressHydrationWarning>
+        <FramerMotionProvider>{children}</FramerMotionProvider>
         <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>

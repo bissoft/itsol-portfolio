@@ -20,15 +20,33 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
 
 let app: FirebaseApp | undefined;
 let database: Database | undefined;
 
-// Only initialize if we have the project ID (prevents build crashes)
-if (firebaseConfig.projectId) {
-  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-  database = getDatabase(app);
+// Defensive initialization check
+const isFirebaseEnabled =
+  process.env.NEXT_PUBLIC_USE_FIREBASE !== "false" &&
+  Boolean(firebaseConfig.apiKey) &&
+  Boolean(firebaseConfig.projectId) &&
+  !firebaseConfig.projectId?.includes("default") &&
+  !firebaseConfig.databaseURL?.includes("default");
+
+if (isFirebaseEnabled) {
+  try {
+    app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+    // Only attempt database connection if in browser and enabled
+    if (typeof window !== "undefined") {
+      // Check for presence of URL or projectId to avoid guessing errors
+      if (firebaseConfig.databaseURL || firebaseConfig.projectId) {
+        database = getDatabase(app);
+      }
+    }
+  } catch (error: any) {
+    console.warn("Firebase Init Error:", error.message);
+  }
 }
 
 export {

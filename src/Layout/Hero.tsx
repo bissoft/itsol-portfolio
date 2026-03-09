@@ -1,10 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import ParticleBackground from "../components/ParticleBackground";
-import ContactModal from "../components/ContactModal";
+import { AnimatePresence, m as motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import Image from "next/image";
 import { HeroData } from "@/lib/cms-defaults";
+
+const ParticleBackground = dynamic(
+  () => import("../components/ParticleBackground"),
+  { ssr: false },
+);
 
 interface HeroProps {
   data?: HeroData;
@@ -31,6 +36,13 @@ const Hero = ({ data }: HeroProps) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showParticles, setShowParticles] = useState(false);
+
+  useEffect(() => {
+    // Delay particles to let LCP happen first
+    const timer = setTimeout(() => setShowParticles(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -63,10 +75,15 @@ const Hero = ({ data }: HeroProps) => {
             {/* Overlay to ensure text readability */}
           </div>
         ) : backgroundImage ? (
-          <div
-            className="absolute inset-0 bg-cover bg-center opacity-20 z-0"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-          />
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={backgroundImage}
+              alt="Hero Background"
+              fill
+              priority
+              className="object-cover opacity-20"
+            />
+          </div>
         ) : (
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-30" />
@@ -82,19 +99,14 @@ const Hero = ({ data }: HeroProps) => {
       />
 
       <div className="absolute inset-0 z-0">
-        <ParticleBackground color="#3B82F6" density={30} />
+        {showParticles && <ParticleBackground color="#3B82F6" density={30} />}
       </div>
 
       <div className="z-10 relative max-w-8xl mx-auto w-full flex flex-col items-center pt-30 pb-10">
         {/* CENTER COLUMN: Text Content */}
         <div className="text-center flex flex-col items-center px-6 lg:px-0 max-w-5xl mx-auto relative z-20">
           {/* Badge / Top Text */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="mb-1"
-          >
+          <div className="mb-1">
             <span className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-blue-100 text-blue-600 text-sm font-semibold shadow-sm hover:shadow-md transition-shadow cursor-default">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -102,27 +114,19 @@ const Hero = ({ data }: HeroProps) => {
               </span>
               {badgeText}
             </span>
-          </motion.div>
+          </div>
 
           {/* Main Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-tight"
-          >
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-gray-900 mb-8 leading-tight">
             {headlineLine1} <br />
             <span className="text-blue-600">{headlineLine2}</span>
-          </motion.h1>
+          </h1>
 
           {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+          <p
             className="mt-4 text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-12"
             dangerouslySetInnerHTML={{ __html: subtext }}
-          ></motion.p>
+          ></p>
 
           {/* Buttons */}
           <motion.div
@@ -189,7 +193,13 @@ const Hero = ({ data }: HeroProps) => {
             className="relative w-full bg-white/80 rounded-2xl overflow-hidden border border-blue-100 backdrop-blur-xl shadow-xl hover:shadow-blue-200/50 transition-shadow duration-500"
           >
             <div className="relative h-40 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center p-4 group cursor-pointer overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay group-hover:scale-105 transition-transform duration-700"></div>
+              <Image
+                src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop"
+                alt="Digital roadmap"
+                fill
+                sizes="260px"
+                className="object-cover opacity-20 mix-blend-overlay group-hover:scale-105 transition-transform duration-700"
+              />
 
               <div className="relative z-10 text-center p-3 border border-white/20 bg-white/10 backdrop-blur-md rounded-xl w-full">
                 <h3 className="text-sm font-bold text-white leading-tight mb-0.5">
@@ -240,7 +250,13 @@ const Hero = ({ data }: HeroProps) => {
             className="relative w-full bg-white/80 rounded-2xl overflow-hidden border border-blue-100 backdrop-blur-xl shadow-xl"
           >
             <div className="relative h-40 bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center p-4 group cursor-pointer overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+              <Image
+                src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop"
+                alt="Digital roadmap"
+                fill
+                sizes="280px"
+                className="object-cover opacity-20 mix-blend-overlay"
+              />
 
               <div className="relative z-10 text-center p-3 border border-white/20 bg-white/10 backdrop-blur-md rounded-xl w-full">
                 <h3 className="text-sm font-bold text-white leading-tight mb-0.5">

@@ -1,23 +1,21 @@
 import { ReactNode } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "@/Layout/Navbar";
-import Footer from "@/components/Footer";
-import ConditionalContact from "@/components/ConditionalContact";
-import ScrollToTopButton from "@/Layout/ScrollToTopButton";
-import ChatBot from "@/components/ChatBot";
-import OnlineStatus from "@/components/OnlineStatus";
-import PageTracker from "@/components/PageTracker";
+
+const Footer = dynamic(() => import("@/components/Footer"));
+const ConditionalContact = dynamic(
+  () => import("@/components/ConditionalContact"),
+);
+import ClientOnlyUtilities from "@/components/ClientOnlyUtilities";
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <PageTracker />
+      <ClientOnlyUtilities />
       <Navbar />
       <main>{children}</main>
       <ConditionalContact />
       <Footer />
-      <ScrollToTopButton />
-      <ChatBot />
-      <OnlineStatus />
     </>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import {
   Facebook,
   Twitter,
@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import { slugify, getSmartPath } from "@/utils";
 import Image from "next/image";
-import logo from "@/assets/image.png"; // Adjust based on next.js asset handling
+import logo from "@/assets/logo.webp";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -89,6 +89,8 @@ const Footer = () => {
                       <Image
                         src={logo}
                         alt="ITSOL Logo"
+                        width={40}
+                        height={40}
                         className="h-10 w-auto object-contain"
                       />
                     </div>

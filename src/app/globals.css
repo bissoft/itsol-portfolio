@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
 body {
-  @apply bg-white text-gray-800 font-sans antialiased;
+  @apply bg-white text-gray-800 antialiased;
+  font-family: var(--font-inter), sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-outfit), sans-serif;
 }
 
 /* ===================== GLOBAL SCROLLBAR ===================== */

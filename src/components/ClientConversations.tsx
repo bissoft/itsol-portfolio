@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Play, Pause } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -163,11 +163,16 @@ const ClientConversations = ({
               <div className="p-6 flex justify-between items-start z-10 relative">
                 <div className="flex items-center gap-3">
                   {/* Partner Logo */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={item.partnerLogo}
-                    alt={item.partner}
-                    className="h-6 w-auto brightness-0 invert"
+                    alt={item.partner || "Partner"}
+                    width={48}
+                    height={24}
+                    unoptimized={
+                      item.partnerLogo?.includes("placehold.co") ||
+                      item.partnerLogo?.includes(".svg")
+                    }
+                    className="h-6 w-auto brightness-0 invert object-contain"
                   />
                   <div className="h-4 w-[1px] bg-white/40"></div>
 
@@ -186,10 +191,15 @@ const ClientConversations = ({
               {/* Speakers Visual */}
               <div className="absolute inset-x-0 bottom-0 h-4/5 z-0">
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent z-10" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={item.image}
                   alt="Speakers"
+                  width={400}
+                  height={400}
+                  unoptimized={
+                    item.image?.includes("placehold.co") ||
+                    item.image?.includes(".svg")
+                  }
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80"
                 />
               </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {m as motion } from "framer-motion";
 import {
   Users,
   Award,
@@ -17,22 +17,23 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+
 import { TeamData } from "@/lib/cms-defaults";
+import TeamSection from "@/components/TeamSection";
 
 const Team = ({ data }: { data: TeamData }) => {
   const router = useRouter();
-  const [activeDepartment, setActiveDepartment] = useState("all");
-  const [hoveredMember, setHoveredMember] = useState<string | null>(null);
+  // const [activeDepartment, setActiveDepartment] = useState("all");
+  // const [hoveredMember, setHoveredMember] = useState<string | null>(null);
+  // const departments = [
+  //   { id: "all", label: "All Team" },
+  //   { id: "leadership", label: "Leadership" },
+  //   { id: "engineering", label: "Engineering" },
+  //   { id: "design", label: "Design" },
+  //   { id: "product", label: "Product" },
+  // ];
 
-  const departments = [
-    { id: "all", label: "All Team" },
-    { id: "leadership", label: "Leadership" },
-    { id: "engineering", label: "Engineering" },
-    { id: "design", label: "Design" },
-    { id: "product", label: "Product" },
-  ];
-
-  const team = data.members;
+  // const team = data.members;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -74,7 +75,7 @@ const Team = ({ data }: { data: TeamData }) => {
       </motion.div>
 
       {/* Hero Section */}
-      <section className="bg-white py-20 lg:py-32 text-center px-4 relative overflow-hidden">
+      {/* <section className="bg-white py-20 lg:py-32 text-center px-4 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-50 skew-x-12 opacity-50"></div>
           <div className="absolute bottom-0 left-0 w-1/4 h-2/3 bg-blue-50 -skew-x-12 opacity-50"></div>
@@ -95,10 +96,10 @@ const Team = ({ data }: { data: TeamData }) => {
             {data.subheading}
           </p>
         </motion.div>
-      </section>
+      </section> */}
 
       {/* Team Grid */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      {/* <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="flex flex-wrap justify-center gap-4 mb-16">
           {departments.map((dept) => (
             <button
@@ -172,7 +173,8 @@ const Team = ({ data }: { data: TeamData }) => {
               </motion.div>
             ))}
         </div>
-      </section>
+      </section> */}
+      <TeamSection/>
 
       {/* Values CTA */}
       <section className="py-20 bg-blue-900 text-white text-center px-4">

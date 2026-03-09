@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m as motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   Search,
@@ -12,6 +12,7 @@ import {
   Video,
   BookOpen,
 } from "lucide-react";
+import Image from "next/image";
 import { BlogsData } from "@/lib/cms-defaults";
 import toast from "react-hot-toast";
 
@@ -166,9 +167,11 @@ const InsightsList = ({ initialData }: InsightsListProps) => {
                   {/* Image Container */}
                   <div className="relative h-64 overflow-hidden">
                     <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-blue-900/0 transition-colors z-10" />
-                    <img
+                    <Image
                       src={blog.image}
                       alt={blog.title}
+                      width={600}
+                      height={400}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute top-4 left-4 z-20">
@@ -203,9 +206,11 @@ const InsightsList = ({ initialData }: InsightsListProps) => {
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 font-bold text-[10px] uppercase overflow-hidden">
                           {blog.authorImage ? (
-                            <img
+                            <Image
                               src={blog.authorImage}
                               alt={blog.author}
+                              width={32}
+                              height={32}
                               className="w-full h-full object-cover"
                             />
                           ) : (

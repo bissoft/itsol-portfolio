@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CompanyStatsData, defaultStatsData } from "@/lib/cms-defaults";
+import Image from "next/image";
 
 interface CompanyStatsProps {
   data?: CompanyStatsData;
@@ -95,12 +96,13 @@ const CompanyStats = ({ data }: CompanyStatsProps) => {
               key={index}
               className="w-full h-8 sm:h-12 md:w-32 md:h-16 flex items-center justify-center p-1"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={client.logo}
                 alt={client.name}
+                width={128}
+                height={64}
+                unoptimized={true}
                 className="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity"
-                onError={(e) => (e.currentTarget.style.display = "none")}
               />
             </div>
           ))}

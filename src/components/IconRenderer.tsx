@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import * as LucideIcons from "lucide-react";
+import { HelpCircle } from "lucide-react";
+import { iconMap } from "@/utils";
 
 interface IconRendererProps {
   iconName: string;
@@ -15,12 +16,7 @@ const IconRenderer: React.FC<IconRendererProps> = ({
   size,
 }) => {
   // @ts-ignore
-  const IconComponent = LucideIcons[iconName];
-
-  if (!IconComponent) {
-    // Fallback icon if name not found
-    return <LucideIcons.HelpCircle className={className} size={size} />;
-  }
+  const IconComponent = iconMap[iconName] || HelpCircle;
 
   return <IconComponent className={className} size={size} />;
 };

@@ -16,35 +16,60 @@ export default function OnlineStatus() {
   useEffect(() => {
     if (!database) return;
 
+    let isSubscribed = true;
     const userId = `user_${Date.now()}`;
     const userRef = ref(database, `onlineUsers/${userId}`);
-
-    set(userRef, {
-      online: true,
-      timestamp: serverTimestamp(),
-    });
-
-    onDisconnect(userRef).remove();
-
     const allUsersRef = ref(database, "onlineUsers");
 
-    onValue(allUsersRef, (snapshot) => {
-      const users = snapshot.val();
-      const activeUsersCount = users ? Object.keys(users).length : 0;
-      setOnlineCount(activeUsersCount);
-    });
+    const setupTracking = async () => {
+      try {
+        await set(userRef, {
+          online: true,
+          timestamp: serverTimestamp(),
+        });
+
+        if (isSubscribed) {
+          onDisconnect(userRef)
+            .remove()
+            .catch(() => {});
+
+          onValue(
+            allUsersRef,
+            (snapshot) => {
+              if (!isSubscribed) return;
+              const users = snapshot.val();
+              const activeUsersCount = users ? Object.keys(users).length : 0;
+              setOnlineCount(activeUsersCount);
+            },
+            (error) => {
+              console.warn("Firebase onValue error:", error.message);
+            },
+          );
+        }
+      } catch (err: any) {
+        console.warn("Firebase tracking initialization failed:", err.message);
+      }
+    };
+
+    setupTracking();
 
     return () => {
-      set(userRef, null);
+      isSubscribed = false;
+      set(userRef, null).catch(() => {});
     };
   }, []);
 
   return (
-    <div className="text-center mt-4">
-      <h1 className="text-2xl sm:text-md">
-        👀 {onlineCount} {onlineCount === 1 ? "person is" : "people are"}{" "}
-        viewing this site right now
-      </h1>
+    <div className="fixed bottom-6 left-6 z-50 pointer-events-none">
+      <div className="bg-white/80 backdrop-blur-md border border-blue-100 px-4 py-2 rounded-full shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="flex h-2 w-2 relative">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+        </div>
+        <p className="text-xs font-semibold text-gray-700 whitespace-nowrap">
+          {onlineCount} {onlineCount === 1 ? "visitor" : "visitors"} online
+        </p>
+      </div>
     </div>
   );
 }

@@ -1,63 +1,79 @@
 import React, { useRef, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import {
+  m as motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
+import Image from "next/image";
 
 const expertiseData = [
   {
     title: "UI/UX Design",
-    description: "Crafting intuitive and accessible user interfaces that drive engagement and conversions.",
+    description:
+      "Crafting intuitive and accessible user interfaces that drive engagement and conversions.",
     details: [
       "User Research & Personas",
       "Wireframing & Prototyping",
       "Design Systems",
-      "Interaction Design"
+      "Interaction Design",
     ],
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800"
+    image:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Web Development",
-    description: "Building robust, scalable, and high-performance web applications using modern technologies.",
+    description:
+      "Building robust, scalable, and high-performance web applications using modern technologies.",
     details: [
       "React, Vue, Angular",
       "Node.js & Python",
       "PWA Development",
-      "E-commerce Solutions"
+      "E-commerce Solutions",
     ],
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=800"
+    image:
+      "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Mobile Apps",
-    description: "Developing native and cross-platform mobile applications for iOS and Android.",
+    description:
+      "Developing native and cross-platform mobile applications for iOS and Android.",
     details: [
       "React Native & Flutter",
       "iOS (Swift) & Android (Kotlin)",
       "App Store Optimization",
-      "Mobile Strategy"
+      "Mobile Strategy",
     ],
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800"
+    image:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Cloud Solutions",
-    description: "Architecting secure and scalable cloud infrastructure for your digital products.",
+    description:
+      "Architecting secure and scalable cloud infrastructure for your digital products.",
     details: [
       "AWS & Azure",
       "DevOps & CI/CD",
       "Microservices",
-      "Serverless Architecture"
+      "Serverless Architecture",
     ],
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "AI & ML",
-    description: "Leveraging artificial intelligence to automate processes and gain data-driven insights.",
+    description:
+      "Leveraging artificial intelligence to automate processes and gain data-driven insights.",
     details: [
       "Predictive Analytics",
       "Natural Language Processing",
       "Computer Vision",
-      "Recommendation Engines"
+      "Recommendation Engines",
     ],
-    image: "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=800"
-  }
+    image:
+      "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&q=80&w=800",
+  },
 ];
 
 const Expertise = () => {
@@ -75,8 +91,12 @@ const Expertise = () => {
         <div className="max-w-7xl mx-auto px-4 w-full mb-12">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-blue-600 font-bold tracking-widest uppercase mb-2">Our Capabilities</h2>
-              <h3 className="text-4xl md:text-5xl font-bold text-gray-900">Areas of Expertise</h3>
+              <h2 className="text-blue-600 font-bold tracking-widest uppercase mb-2">
+                Our Capabilities
+              </h2>
+              <h3 className="text-4xl md:text-5xl font-bold text-gray-900">
+                Areas of Expertise
+              </h3>
             </div>
             <div className="hidden md:flex gap-4">
               <div className="p-3 bg-gray-100 rounded-full text-gray-500">
@@ -97,12 +117,20 @@ const Expertise = () => {
               onClick={() => setSelectedExpertise(item)}
             >
               <div className="absolute inset-0">
-                <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={450}
+                  height={450}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-80 group-hover:opacity-70 transition-opacity" />
               </div>
 
               <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  {item.title}
+                </h3>
                 <p className="text-gray-200 line-clamp-2 mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                   {item.description}
                 </p>
@@ -141,19 +169,32 @@ const Expertise = () => {
 
               <div className="grid md:grid-cols-2">
                 <div className="h-64 md:h-auto relative">
-                  <img src={selectedExpertise.image} alt={selectedExpertise.title} className="w-full h-full object-cover" />
+                  <Image
+                    src={selectedExpertise.image}
+                    alt={selectedExpertise.title}
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-blue-600/20 mix-blend-multiply" />
                 </div>
                 <div className="p-8 md:p-12">
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4">{selectedExpertise.title}</h3>
+                  <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                    {selectedExpertise.title}
+                  </h3>
                   <p className="text-gray-600 text-lg mb-8 leading-relaxed">
                     {selectedExpertise.description}
                   </p>
 
-                  <h4 className="font-semibold text-gray-900 mb-4 uppercase tracking-wider text-sm">What We Deliver</h4>
+                  <h4 className="font-semibold text-gray-900 mb-4 uppercase tracking-wider text-sm">
+                    What We Deliver
+                  </h4>
                   <ul className="space-y-3">
                     {selectedExpertise.details.map((detail, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-gray-700 p-3 bg-gray-50 rounded-xl">
+                      <li
+                        key={idx}
+                        className="flex items-center gap-3 text-gray-700 p-3 bg-gray-50 rounded-xl"
+                      >
                         <div className="w-2 h-2 rounded-full bg-blue-500" />
                         {detail}
                       </li>

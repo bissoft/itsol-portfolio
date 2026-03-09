@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import {
   Users,
   Rocket,
@@ -12,19 +12,20 @@ import {
   Clock,
   ArrowLeft,
   ChevronRight,
+  HelpCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { AboutData } from "@/lib/cms-defaults";
-import * as LucideIcons from "lucide-react";
+import { iconMap } from "@/utils";
 
 const AboutUs = ({ data }: { data: AboutData }) => {
   const [activeTab, setActiveTab] = useState("mission");
   const router = useRouter();
 
   const getIcon = (name: string) => {
-    const IconComponent = (LucideIcons as any)[name] || LucideIcons.HelpCircle;
+    const IconComponent = iconMap[name] || HelpCircle;
     return <IconComponent className="text-blue-500" />;
   };
 

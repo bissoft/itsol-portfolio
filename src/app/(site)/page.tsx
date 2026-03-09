@@ -1,20 +1,30 @@
 import Hero from "@/Layout/Hero";
 import CompanyStats from "@/components/CompanyStats";
-import ServicesSection from "@/components/ServicesSection";
-import Projects from "@/components/Projects";
-import ClientConversations from "@/components/ClientConversations";
-import Partners from "@/components/Partners";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import Awards from "@/components/Awards";
-import ItsolValue from "@/components/ItsolValue";
-import IndustriesSection from "@/components/IndustriesSection";
-import EngagementModels from "@/components/EngagementModels";
-import LeadMagnet from "@/components/LeadMagnet";
-import Testimonials from "@/components/Testimonials";
-import TechStack from "@/components/TechStack";
-import TeamSection from "@/components/TeamSection";
-import Insights from "@/components/Insights";
-import FaqSection from "@/components/FaqSection";
+import nextDynamic from "next/dynamic";
+
+const ServicesSection = nextDynamic(
+  () => import("@/components/ServicesSection"),
+);
+const Projects = nextDynamic(() => import("@/components/Projects"));
+const ClientConversations = nextDynamic(
+  () => import("@/components/ClientConversations"),
+);
+const Partners = nextDynamic(() => import("@/components/Partners"));
+const WhyChooseUs = nextDynamic(() => import("@/components/WhyChooseUs"));
+const Awards = nextDynamic(() => import("@/components/Awards"));
+const ItsolValue = nextDynamic(() => import("@/components/ItsolValue"));
+const IndustriesSection = nextDynamic(
+  () => import("@/components/IndustriesSection"),
+);
+const EngagementModels = nextDynamic(
+  () => import("@/components/EngagementModels"),
+);
+const LeadMagnet = nextDynamic(() => import("@/components/LeadMagnet"));
+const Testimonials = nextDynamic(() => import("@/components/Testimonials"));
+const TechStack = nextDynamic(() => import("@/components/TechStack"));
+const TeamSection = nextDynamic(() => import("@/components/TeamSection"));
+const Insights = nextDynamic(() => import("@/components/Insights"));
+const FaqSection = nextDynamic(() => import("@/components/FaqSection"));
 export const dynamic = "force-dynamic";
 
 import {
@@ -28,13 +38,23 @@ import {
 } from "@/lib/cms";
 
 export default async function Home() {
-  const heroData = await getHeroData();
-  const statsData = await getStatsData();
-  const servicesData = await getServicesData();
-  const projectsData = await getProjectsData();
-  const conversationsData = await getConversationsData();
-  const partnersData = await getPartnersData();
-  const whyChooseUsData = await getWhyChooseUsData();
+  const [
+    heroData,
+    statsData,
+    servicesData,
+    projectsData,
+    conversationsData,
+    partnersData,
+    whyChooseUsData,
+  ] = await Promise.all([
+    getHeroData(),
+    getStatsData(),
+    getServicesData(),
+    getProjectsData(),
+    getConversationsData(),
+    getPartnersData(),
+    getWhyChooseUsData(),
+  ]);
 
   return (
     <>

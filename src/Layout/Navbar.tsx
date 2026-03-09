@@ -1,15 +1,21 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import DesktopMenu from "../components/DesktopMenu";
-import MobMenu from "../components/MobMenu";
+import { m as motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+import logo from "@/assets/logo.webp";
 import { Menus, MenuItem, convertNavbarDataToMenuItems } from "../utils";
 import { usePathname, useRouter } from "next/navigation";
 import MeetingButton from "../components/MeetingButton";
 import { X, Sparkles } from "lucide-react";
 import Image from "next/image";
-import logo from "@/assets/image.png"; // Adjust based on next.js asset handling
+
+const DesktopMenu = dynamic(() => import("../components/DesktopMenu"), {
+  ssr: true, // Keep SSR for SEO of links
+});
+const MobMenu = dynamic(() => import("../components/MobMenu"), {
+  ssr: false, // Mobile menu isn't needed for SEO/initial paint as it's hidden
+});
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -97,6 +103,8 @@ const Navbar = () => {
                   <Image
                     src={logo}
                     alt="ITSOL Logo"
+                    width={64}
+                    height={64}
                     className={`${isScrolled || isSolidNavbar ? "h-10 md:h-12" : "h-14 md:h-16"} w-auto object-contain transition-all duration-300`}
                     // animate={{
                     //   scale: isHoveringLogo ? 1.05 : 1,

@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
+import Image from "next/image";
 
 import { PartnersData, defaultPartnersData } from "@/lib/cms-defaults";
 
@@ -48,11 +49,13 @@ const Partners = ({ data }: PartnersProps) => {
               title={partner.name}
             >
               {/* Force white logo for blue background consistency - using filters since these are SVGs */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={partner.logo}
                 alt={partner.name}
-                className={`h-5 sm:h-8 md:h-10 object-contain hover:opacity-100 transition-opacity ${partner.width}`}
+                width={120}
+                height={40}
+                unoptimized
+                className="h-5 sm:h-8 md:h-10 w-auto object-contain hover:opacity-100 transition-opacity"
               />
             </motion.div>
           ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { LifeBuoy, MessageSquare, FileText, Clock, Mail, Phone, Zap, ChevronRight, Search, CheckCircle, ArrowLeft } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

@@ -382,6 +382,7 @@ export async function getTeamData(): Promise<TeamData> {
   }
 }
 
+
 export async function updateTeamData(data: TeamData): Promise<void> {
   await dbConnect();
   try {
@@ -391,6 +392,7 @@ export async function updateTeamData(data: TeamData): Promise<void> {
       setDefaultsOnInsert: true,
     });
     revalidatePath("/");
+    revalidatePath("/team");
   } catch (error) {
     console.error("Error updating team data:", error);
     throw new Error("Failed to update team data");

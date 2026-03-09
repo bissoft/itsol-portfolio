@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { Linkedin, Twitter, Mail, Github } from "lucide-react";
+import Image from "next/image";
 import { getTeamData } from "@/lib/cms";
 import { TeamData } from "@/lib/cms-defaults";
 
@@ -70,11 +71,12 @@ const TeamSection = () => {
               {/* Image Container */}
               <div className="relative h-64 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity" />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
 
                 {/* Social Overlay */}
@@ -148,11 +150,12 @@ const TeamSection = () => {
               transition={{ delay: idx * 0.1, duration: 0.5 }}
               className="min-w-[300px] md:min-w-[400px] h-[300px] rounded-2xl overflow-hidden shadow-2xl relative snap-center"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={img}
                 alt="Team culture"
-                className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                fill
+                sizes="(max-width: 768px) 300px, 400px"
+                className="object-cover hover:scale-110 transition-transform duration-700"
               />
             </motion.div>
           ))}
