@@ -18,7 +18,7 @@ export default function ClientOnlyUtilities() {
     <>
       <PageTracker />
       <ScrollToTopButton />
-      <ChatBot />
+      {/* <ChatBot /> */}
       <OnlineStatus />
     </>
   );
