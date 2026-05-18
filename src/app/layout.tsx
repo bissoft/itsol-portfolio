@@ -15,6 +15,8 @@ const outfit = Outfit({
 });
 import { Toaster } from "react-hot-toast";
 import FramerMotionProvider from "@/components/FramerMotionProvider";
+import Script from "next/script";
+
 
 export const metadata: Metadata = {
   title: {
@@ -77,6 +79,11 @@ export default function RootLayout({
       <body className="antialiased font-inter" suppressHydrationWarning>
         <FramerMotionProvider>{children}</FramerMotionProvider>
         <Toaster position="top-right" reverseOrder={false} />
+        <Script
+          id="cd360-snippet"
+          src="https://app.chattrik.com:/assets/scripts/snippet.js?key=69cfb778aff1184ea0c86f5e"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
